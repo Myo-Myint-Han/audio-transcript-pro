@@ -6,15 +6,11 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "50mb",
     },
   },
+
   serverExternalPackages: ["@prisma/client", "@prisma/engines"],
 
-  // CRITICAL: Change output mode
+  // Keep standalone for optimal performance
   output: "standalone",
-
-  // Add this to ensure Prisma binaries are copied
-  outputFileTracingIncludes: {
-    "/api/**/*": ["./node_modules/.prisma/client/**/*"],
-  },
 
   turbopack: {},
 };
