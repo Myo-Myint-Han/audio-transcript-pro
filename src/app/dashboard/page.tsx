@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -37,7 +37,7 @@ interface Transcript {
   createdAt: string;
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const { user, token } = useAuth();
   const searchParams = useSearchParams();
   const transcriptParam = searchParams.get("transcript");
@@ -478,5 +478,19 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-20 flex items-center justify-center">
+          <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        </div>
+      }
+    >
+      <DashboardContent />
+    </Suspense>
   );
 }
