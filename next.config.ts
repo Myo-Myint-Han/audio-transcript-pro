@@ -5,15 +5,14 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: "50mb",
     },
-    serverComponentsExternalPackages: ["@prisma/client", "@prisma/engines"],
   },
+  // Fixed: Moved from experimental to root level
+  serverExternalPackages: ["@prisma/client", "@prisma/engines"],
+
   output: "standalone",
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.externals.push("@prisma/client");
-    }
-    return config;
-  },
+
+  // Fixed: Add turbopack config to silence the warning
+  turbopack: {},
 };
 
 export default nextConfig;
