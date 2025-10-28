@@ -72,7 +72,7 @@ export default function TranscribePage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-20">
+      <div className="min-h-screen bg-gradient-to-b from-teal-50 to-white py-20">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-6">
             Please Login to Transcribe
@@ -89,7 +89,7 @@ export default function TranscribePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-20">
+    <div className="min-h-screen bg-gradient-to-b from-teal-50 to-white py-20">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -185,11 +185,8 @@ export default function TranscribePage() {
                             : "border-gray-200 hover:border-gray-300"
                         }`}
                       >
-                        <div className="text-2xl mb-2">🇬🇧</div>
+                        <div className="text-2xl mb-2">ENG</div>
                         <div className="font-semibold">English</div>
-                        <div className="text-xs text-gray-500 mt-1">
-                          ISO: en
-                        </div>
                       </button>
                       <button
                         onClick={() => setLanguage("my")}
@@ -201,44 +198,7 @@ export default function TranscribePage() {
                       >
                         <div className="text-2xl mb-2">🇲🇲</div>
                         <div className="font-semibold">မြန်မာ</div>
-                        <div className="text-xs text-gray-500 mt-1">
-                          Myanmar/Burmese (ISO: my)
-                        </div>
                       </button>
-                    </div>
-
-                    {/* Language Tips */}
-                    <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <div className="flex items-start space-x-2">
-                        <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                        <div className="text-sm text-blue-800">
-                          {language === "my" ? (
-                            <>
-                              <p className="font-semibold mb-1">
-                                မြန်မာဘာသာ မှတ်တမ်းတင်ခြင်း အကြံပြုချက်များ:
-                              </p>
-                              <ul className="list-disc list-inside space-y-1 text-xs">
-                                <li>ရှင်းလင်းပြတ်သားစွာ ပြောဆိုပါ</li>
-                                <li>နောက်ခံအသံများကို လျှော့ချပါ</li>
-                                <li>အနည်းဆုံး 20-30 စက္ကန့် အသံဖမ်းပါ</li>
-                                <li>စံမြန်မာစကားကို အသုံးပြုပါ</li>
-                              </ul>
-                            </>
-                          ) : (
-                            <>
-                              <p className="font-semibold mb-1">
-                                Tips for better English transcription:
-                              </p>
-                              <ul className="list-disc list-inside space-y-1 text-xs">
-                                <li>Speak clearly and at a moderate pace</li>
-                                <li>Minimize background noise</li>
-                                <li>Record at least 20-30 seconds</li>
-                                <li>Use a good quality microphone</li>
-                              </ul>
-                            </>
-                          )}
-                        </div>
-                      </div>
                     </div>
                   </div>
 
@@ -286,62 +246,10 @@ export default function TranscribePage() {
                       </>
                     )}
                   </Button>
-
-                  {/* Additional Info */}
-                  <div className="text-center text-xs text-gray-500">
-                    <p>
-                      Powered by Whisper AI •{" "}
-                      {language === "my" ? "မြန်မာဘာသာ" : "English"}{" "}
-                      transcription
-                    </p>
-                    <p className="mt-1">
-                      Processing typically takes 5-30 seconds depending on audio
-                      length
-                    </p>
-                  </div>
                 </>
               )}
             </CardContent>
           </Card>
-        )}
-
-        {/* Feature Highlights */}
-        {!mode && (
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">⚡</span>
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-1">
-                Fast Processing
-              </h4>
-              <p className="text-sm text-gray-600">
-                Get your transcripts in seconds, not minutes
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">🎯</span>
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-1">
-                High Accuracy
-              </h4>
-              <p className="text-sm text-gray-600">
-                Powered by Whisper AI for professional quality
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">🌏</span>
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-1">
-                Multi-Language
-              </h4>
-              <p className="text-sm text-gray-600">
-                Support for English and Myanmar (Burmese)
-              </p>
-            </div>
-          </div>
         )}
       </div>
     </div>

@@ -17,7 +17,6 @@ export function Navbar() {
     { href: "/", label: "Home" },
     { href: "/transcribe", label: "Transcribe" },
     ...(user ? [{ href: "/dashboard", label: "Dashboard" }] : []),
-    { href: "/pricing", label: "Pricing" },
   ];
 
   const handleLogout = () => {

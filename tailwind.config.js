@@ -15,24 +15,24 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "hsl(177, 100%, 32%)", // Teal #00A19A
+          foreground: "hsl(0, 0%, 100%)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "hsl(0, 84%, 70%)", // Coral #FF6B6B
+          foreground: "hsl(0, 0%, 100%)",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "hsl(177, 70%, 90%)", // Light teal
+          foreground: "hsl(177, 100%, 32%)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "hsl(210, 40%, 96.1%)",
+          foreground: "hsl(215.4, 16.3%, 46.9%)",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "hsl(0, 0%, 100%)",
+          foreground: "hsl(222.2, 84%, 4.9%)",
         },
       },
       borderRadius: {

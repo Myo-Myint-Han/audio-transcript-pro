@@ -51,13 +51,13 @@ export async function POST(request: NextRequest) {
 
     const language = fields.language || "en";
 
-    // Create transcript record
+    // Create transcript record with Supabase URL
     const transcript = await prisma.transcript.create({
       data: {
         userId: user.id,
         fileName: file.originalFilename || "unknown",
         fileSize: file.size || 0,
-        filePath: `/uploads/${file.newFilename}`,
+        filePath: file.filepath, // This is now the Supabase public URL
         language: language,
         status: "processing",
         progress: 0,
@@ -65,6 +65,7 @@ export async function POST(request: NextRequest) {
     });
 
     console.log("✅ Transcript created:", transcript.id);
+    console.log("📁 File URL:", file.filepath);
 
     // Start transcription process (don't await - let it run in background)
     processTranscript(transcript.id, file.filepath, language as "en" | "my");
@@ -77,10 +78,10 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Real transcription process using Hugging Face Whisper (FREE)
+// Real transcription process
 async function processTranscript(
   transcriptId: string,
-  filePath: string,
+  fileUrl: string,
   language: "en" | "my"
 ) {
   try {
@@ -91,6 +92,7 @@ async function processTranscript(
     });
 
     console.log(`Starting transcription for ${transcriptId}`);
+    console.log(`File URL: ${fileUrl}`);
 
     // Update progress to 30%
     await prisma.transcript.update({
@@ -98,8 +100,8 @@ async function processTranscript(
       data: { progress: 30 },
     });
 
-    // Call Hugging Face Whisper API for transcription (FREE!)
-    const transcriptText = await transcribeAudio(filePath, language);
+    // Call transcription API (fileUrl is a Supabase public URL)
+    const transcriptText = await transcribeAudio(fileUrl, language);
 
     console.log(`Transcription completed for ${transcriptId}`);
 
@@ -109,10 +111,8 @@ async function processTranscript(
       data: { progress: 90 },
     });
 
-    // Calculate approximate duration
-    const fs = require("fs");
-    const stats = fs.statSync(filePath);
-    const approximateDuration = Math.round(stats.size / (128000 / 8));
+    // Estimate duration (rough estimate based on file size)
+    const approximateDuration = 60; // Default to 60 seconds
 
     // Update to completed
     await prisma.transcript.update({

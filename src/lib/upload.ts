@@ -1,15 +1,6 @@
-import formidable from "formidable";
-import fs from "fs";
-import path from "path";
+import { supabase } from "./supabase";
 
-export const uploadDir = path.join(process.cwd(), "public", "uploads");
-
-// Ensure upload directory exists
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-interface ParsedFile {
+export interface ParsedFile {
   filepath: string;
   originalFilename: string | null;
   mimetype: string | null;
@@ -17,7 +8,7 @@ interface ParsedFile {
   newFilename: string;
 }
 
-interface ParsedFormData {
+export interface ParsedFormData {
   fields: Record<string, string>;
   files: Record<string, ParsedFile>;
 }
@@ -29,15 +20,32 @@ export async function parseForm(request: Request): Promise<ParsedFormData> {
 
   for (const [key, value] of formData.entries()) {
     if (value instanceof File) {
-      // Handle file
+      // Handle file upload to Supabase Storage
       const buffer = Buffer.from(await value.arrayBuffer());
       const filename = `${Date.now()}-${value.name}`;
-      const filepath = path.join(uploadDir, filename);
+      const filepath = `${filename}`;
 
-      fs.writeFileSync(filepath, buffer);
+      // Upload to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from("audio-files")
+        .upload(filepath, buffer, {
+          contentType: value.type,
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (error) {
+        console.error("Upload error:", error);
+        throw new Error(`Failed to upload file: ${error.message}`);
+      }
+
+      // Get public URL
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("audio-files").getPublicUrl(filepath);
 
       files[key] = {
-        filepath,
+        filepath: publicUrl,
         originalFilename: value.name,
         mimetype: value.type,
         size: value.size,

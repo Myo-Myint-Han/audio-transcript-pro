@@ -223,7 +223,7 @@ function DashboardContent() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-20">
+      <div className="min-h-screen bg-gradient-to-b from-teal-50 to-white py-20">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-6">
             Please Login
@@ -241,7 +241,7 @@ function DashboardContent() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-teal-50 to-white py-12">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-8 flex items-center justify-between">
           <div>
@@ -485,7 +485,7 @@ export default function DashboardPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-20 flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-b from-teal-50 to-white py-20 flex items-center justify-center">
           <Loader2 className="h-12 w-12 animate-spin text-primary" />
         </div>
       }
