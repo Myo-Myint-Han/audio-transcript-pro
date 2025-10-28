@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "50mb",
     },
   },
+  // Force output to standalone mode (this often fixes Prisma on Vercel)
+  output: "standalone",
 };
 
 export default nextConfig;
