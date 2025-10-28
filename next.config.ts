@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: "50mb",
     },
+    serverComponentsExternalPackages: ["@prisma/client", "@prisma/engines"],
   },
-  // Force output to standalone mode (this often fixes Prisma on Vercel)
   output: "standalone",
 };
 
