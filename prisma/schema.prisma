@@ -1,6 +1,7 @@
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
+  engineType    = "library"
 }
 
 datasource db {
@@ -28,9 +29,9 @@ model Transcript {
   fileSize    Int
   filePath    String
   duration    Float?
-  language    String   // 'en' or 'my'
+  language    String
   
-  status      String   // 'processing', 'completed', 'failed'
+  status      String
   progress    Int      @default(0)
   
   transcript  String?  @default("")
