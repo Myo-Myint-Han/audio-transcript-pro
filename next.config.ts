@@ -9,8 +9,7 @@ const nextConfig: NextConfig = {
 
   serverExternalPackages: ["@prisma/client", "@prisma/engines"],
 
-  // Keep standalone for optimal performance
-  output: "standalone",
+  // REMOVED: output: "standalone",
 
   turbopack: {},
 };
